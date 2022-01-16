@@ -34,11 +34,11 @@ public class DownStrikeGoal extends Goal {
                 timer = 0;
             }
             else{
-                if(timer < 40){
+                if(timer < 35){
                     this.timer++;
                     this.entity.setAttackState(1);
                     if(timer == 14){
-                        tryAttack(entity, this.entity.getTarget());
+                        tryAttack(this.entity, this.entity.getTarget());
                     }
                 }
                 else{
