@@ -22,11 +22,19 @@ public class RFCheerGoal extends Goal {
     @Override
     public void tick() {
         super.tick();
+
+        if(this.entity.getAnimState() == 3 && this.entity.getTarget() != null){
+            this.entity.setActionPriority(0);
+            this.entity.setAnimState(0);
+            this.hasTarget = false;
+            this.timer = 0;
+        }
         if(this.entity.getTarget() != null){
             this.hasTarget = true;
             if(this.entity.distanceToSqr(this.entity.getTarget()) > 10f){
                 this.hasTarget = false;
             }
+
         }
 
         if(this.entity.getTarget() == null && this.hasTarget){
@@ -48,6 +56,7 @@ public class RFCheerGoal extends Goal {
                 this.timer = 0;
             }
         }
+
     }
 }
 

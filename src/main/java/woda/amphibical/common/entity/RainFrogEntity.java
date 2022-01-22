@@ -4,6 +4,8 @@ package woda.amphibical.common.entity;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -11,7 +13,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -22,7 +26,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import woda.amphibical.common.entity.ai.rainfrog.RFCheerGoal;
+import woda.amphibical.common.entity.ai.rainfrog.RFEatGoal;
 import woda.amphibical.common.entity.ai.rainfrog.RFSocializeGoal;
+import woda.amphibical.registry.AmphibicalItems;
 
 public class RainFrogEntity extends AbstractFrogEntity implements IAnimatable, IAnimationTickable {
     private final AnimationFactory factory = new AnimationFactory(this);
@@ -61,6 +67,9 @@ public class RainFrogEntity extends AbstractFrogEntity implements IAnimatable, I
             case 3:
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.frog.dance", false));
                 return PlayState.CONTINUE;
+            case 4:
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.frog.eat", false));
+                return PlayState.CONTINUE;
         }
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.frog.idle", true));
         return PlayState.CONTINUE;
@@ -76,13 +85,20 @@ public class RainFrogEntity extends AbstractFrogEntity implements IAnimatable, I
     }
 
     @Override
+    public void tick() {
+        super.tick();
+    }
+
+    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1.0d));
         this.goalSelector.addGoal(2, new RFSocializeGoal(this));
         this.goalSelector.addGoal(2, new RFCheerGoal(this));
+        this.goalSelector.addGoal(2, new RFEatGoal(this));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.3f, false));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, FrugEntity.class, true));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
     }
 
     @Override
@@ -114,5 +130,15 @@ public class RainFrogEntity extends AbstractFrogEntity implements IAnimatable, I
 
     public int getAnimState() {
         return this.entityData.get(ANIM_STATE);
+    }
+
+    @Override
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        if(player.getItemInHand(hand).is(AmphibicalItems.FRUG.get())){
+            this.setItemInHand(InteractionHand.MAIN_HAND, player.getItemInHand(InteractionHand.MAIN_HAND));
+            player.getItemInHand(hand).shrink(1);
+            return InteractionResult.SUCCESS;
+        }
+        return super.mobInteract(player, hand);
     }
 }
