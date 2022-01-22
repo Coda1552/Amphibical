@@ -42,7 +42,9 @@ public class DownStrikeGoal extends Goal {
                     }
                 }
                 else{
-                    this.stop();
+                    timer = 0;
+                    ctimer = 0;
+                    this.entity.setAttackState(0);
                 }
             }
         }
@@ -51,9 +53,9 @@ public class DownStrikeGoal extends Goal {
     @Override
     public void stop() {
         super.stop();
-        timer = 0;
-        ctimer = 0;
-        this.entity.setAttackState(0);
+        //timer = 0;
+        //ctimer = 0;
+        //this.entity.setAttackState(0);
     }
 
     public void tryAttack(PinocchioSwordmasterEntity entity, LivingEntity target){
