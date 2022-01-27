@@ -28,7 +28,6 @@ public class RFSocializeGoal extends Goal {
     @Override
     public void tick() {
         super.tick();
-        System.out.println(this.entity.getAnimState());
         if(cTimer < COOLDOWN){
             cTimer++;
         }
@@ -36,7 +35,7 @@ public class RFSocializeGoal extends Goal {
             if(timer < 80) {
                 if (getClosestFrog() != null) {
                     this.entity.setActionPriority(PRIORITY);
-                    if(this.entity.distanceToSqr(getClosestFrog()) > 4f) {
+                    if(this.entity.distanceToSqr(getClosestFrog()) > 7f) {
                         this.entity.getNavigation().moveTo(getClosestFrog(), 1.0d);
                     }
                     this.entity.getLookControl().setLookAt(getClosestFrog(), 30f, 30f);

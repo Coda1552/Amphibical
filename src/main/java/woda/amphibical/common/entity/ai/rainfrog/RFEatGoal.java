@@ -36,6 +36,8 @@ public class RFEatGoal extends Goal {
     public void startEating(){
         if(timer < 10){
             timer++;
+            this.entity.getNavigation().stop();
+            this.entity.setDeltaMovement(0d, this.entity.getDeltaMovement().y(), 0d);
             this.entity.setActionPriority(PRIORITY);
             this.entity.setAnimState(4);
             if(timer > 6){
@@ -44,7 +46,6 @@ public class RFEatGoal extends Goal {
         }
         else{
             this.entity.playSound(SoundEvents.PLAYER_BURP, 3.0f, 1.5f);
-            this.entity.setDeltaMovement(0d, this.entity.getDeltaMovement().y(), 0d);
             this.entity.heal(4.0f);
             this.entity.setActionPriority(0);
             this.entity.setAnimState(0);

@@ -12,9 +12,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
-import woda.amphibical.client.model.PinocchioSwordmasterModel;
 import woda.amphibical.client.model.RainFrogModel;
-import woda.amphibical.common.entity.PinocchioSwordmasterEntity;
 import woda.amphibical.common.entity.RainFrogEntity;
 
 public class RainFrogRenderer extends GeoEntityRenderer<RainFrogEntity> {

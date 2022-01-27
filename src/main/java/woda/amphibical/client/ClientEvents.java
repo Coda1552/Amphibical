@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import woda.amphibical.Amphibical;
 import woda.amphibical.client.renderer.FrugRenderer;
-import woda.amphibical.client.renderer.PinocchioSwordmasterRenderer;
 import woda.amphibical.client.renderer.RainFrogRenderer;
 import woda.amphibical.registry.AmphibicalEntities;
 
@@ -16,7 +15,6 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
-        EntityRenderers.register(AmphibicalEntities.PINOCCHIO_SWORDMASTER.get(), PinocchioSwordmasterRenderer::new);
         EntityRenderers.register(AmphibicalEntities.RAIN_FROG.get(), RainFrogRenderer::new);
         EntityRenderers.register(AmphibicalEntities.FRUG.get(), FrugRenderer::new);
     }

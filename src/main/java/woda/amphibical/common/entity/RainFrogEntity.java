@@ -4,9 +4,13 @@ package woda.amphibical.common.entity;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -16,6 +20,9 @@ import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
@@ -34,6 +41,7 @@ public class RainFrogEntity extends AbstractFrogEntity implements IAnimatable, I
     private final AnimationFactory factory = new AnimationFactory(this);
     private static final EntityDataAccessor<Integer> ACTION_PRIORITY = SynchedEntityData.defineId(RainFrogEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> ANIM_STATE = SynchedEntityData.defineId(RainFrogEntity.class, EntityDataSerializers.INT);
+    private final SimpleContainer inventory = new SimpleContainer(8);
 
 
     @Override
@@ -132,13 +140,29 @@ public class RainFrogEntity extends AbstractFrogEntity implements IAnimatable, I
         return this.entityData.get(ANIM_STATE);
     }
 
+
+    @Override
+    public void onAddedToWorld() {
+        super.onAddedToWorld();
+        if(this.getRandom().nextFloat() < 0.18){
+            this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE_HOE));
+        }
+            if(this.getRandom().nextFloat() < 0.5f){
+                this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
+            }
+            if(this.getRandom().nextFloat() > 0.9f){
+                this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
+            }
+    }
+
+
+
+    public SimpleContainer getInventory(){
+        return this.inventory;
+    }
+
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        if(player.getItemInHand(hand).is(AmphibicalItems.FRUG.get())){
-            this.setItemInHand(InteractionHand.MAIN_HAND, player.getItemInHand(InteractionHand.MAIN_HAND));
-            player.getItemInHand(hand).shrink(1);
-            return InteractionResult.SUCCESS;
-        }
         return super.mobInteract(player, hand);
     }
 }
