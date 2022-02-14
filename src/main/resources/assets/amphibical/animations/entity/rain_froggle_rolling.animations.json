@@ -1,0 +1,27 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.froggle.spin": {
+			"loop": true,
+			"animation_length": 1,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": ["Math.lerp(0, 180, query.anim_time * 4)", 0, 0]
+					}
+				},
+				"leftArm": {
+					"rotation": {
+						"vector": [0, "Math.sin(query.anim_time * 360 ) * 45", "Math.cos(query.anim_time * 360) * -45"]
+					}
+				},
+				"rightArm": {
+					"rotation": {
+						"vector": [0, "Math.sin(query.anim_time * 360 ) * -45", "Math.cos(query.anim_time * 360) * 45"]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}
