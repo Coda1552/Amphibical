@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -95,6 +96,7 @@ public class RainFrogEntity extends AbstractFrogEntity implements IAnimatable, I
     @Override
     public void tick() {
         super.tick();
+        //System.out.println(this.getItemBySlot(EquipmentSlot.HEAD));
     }
 
     @Override
@@ -105,9 +107,11 @@ public class RainFrogEntity extends AbstractFrogEntity implements IAnimatable, I
         this.goalSelector.addGoal(2, new RFCheerGoal(this));
         this.goalSelector.addGoal(2, new RFEatGoal(this));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.3f, false));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, FrugEntity.class, true));
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
     }
+
 
     @Override
     public void registerControllers(AnimationData data) {
@@ -147,12 +151,12 @@ public class RainFrogEntity extends AbstractFrogEntity implements IAnimatable, I
         if(this.getRandom().nextFloat() < 0.18){
             this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.STONE_HOE));
         }
-            if(this.getRandom().nextFloat() < 0.5f){
-                this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
-            }
-            if(this.getRandom().nextFloat() > 0.9f){
-                this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
-            }
+        if(this.getRandom().nextFloat() < 0.2f){
+            this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.IRON_HELMET));
+        }
+        if(this.getRandom().nextFloat() > 0.85f){
+            this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.LEATHER_HELMET));
+        }
     }
 
 

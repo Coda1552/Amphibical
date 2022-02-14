@@ -12,6 +12,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
+import woda.amphibical.client.layer.RainFrogArmourLayer;
 import woda.amphibical.client.model.RainFrogModel;
 import woda.amphibical.common.entity.RainFrogEntity;
 
@@ -19,6 +20,7 @@ public class RainFrogRenderer extends GeoEntityRenderer<RainFrogEntity> {
     private RainFrogEntity entity;
     public RainFrogRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new RainFrogModel());
+        this.addLayer(new RainFrogArmourLayer(this));
         this.shadowRadius = 0.3F;
     }
 
