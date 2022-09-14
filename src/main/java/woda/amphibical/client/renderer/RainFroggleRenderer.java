@@ -2,20 +2,11 @@ package woda.amphibical.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
-import software.bernie.geckolib3.geo.render.built.GeoBone;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 import woda.amphibical.client.layer.RainFrogArmourLayer;
-import woda.amphibical.client.model.RainFrogModel;
 import woda.amphibical.client.model.RainFroggleModel;
-import woda.amphibical.common.entity.RainFrogEntity;
 import woda.amphibical.common.entity.RainFroggleEntity;
 
 public class RainFroggleRenderer extends GeoEntityRenderer<RainFroggleEntity> {

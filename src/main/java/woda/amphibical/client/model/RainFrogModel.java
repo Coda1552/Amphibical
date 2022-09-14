@@ -9,11 +9,14 @@ public class RainFrogModel extends AnimatedTickingGeoModel<RainFrogEntity> {
 
     @Override
     public ResourceLocation getModelLocation(RainFrogEntity object) {
-        return new ResourceLocation(Amphibical.MOD_ID, "geo/entity/rain_frog.geo.json");
+        return new ResourceLocation(Amphibical.MOD_ID, "geo/entity/rain_frog_backpack.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(RainFrogEntity object) {
+        if(object.getVariant()){
+            return new ResourceLocation(Amphibical.MOD_ID, "textures/entity/rain_frog_backpack.png");
+        }
         return new ResourceLocation(Amphibical.MOD_ID, "textures/entity/rain_frog.png");
     }
 

@@ -1,7 +1,5 @@
 package woda.amphibical.common.entity.ai.rainfrog;
 
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
 import woda.amphibical.common.entity.RainFroggleEntity;
@@ -17,17 +15,20 @@ public class RFLChargeGoal extends Goal {
 
     @Override
     public boolean canUse() {
-            return this.entity.getTarget() != null;
+        if(this.entity.getTarget() != null ){
+            return true;
+        }
+        else{
+            this.entity.setAttackState(0);
+            cooldown = 0;
+            timer = 0;
+            return false;
+        }
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(this.entity.getAttackState() == 1){
-            if(this.entity.getBoundingBox().contains(this.entity.getPosition(1f))){
-                    System.out.println("hi");
-            }
-        }
         if(cooldown < 20){
             cooldown++;
             timer = 0;
@@ -37,7 +38,7 @@ public class RFLChargeGoal extends Goal {
             if (this.entity.distanceToSqr(this.entity.getTarget()) < 35f) {
 
             Vec3 targetPos = this.entity.getTarget().getPosition(1f);
-            if (timer <= 40) {
+            if (timer <= 25) {
                 timer++;
                 this.entity.setAttackState(1);
                 this.entity.getNavigation().stop();
@@ -56,7 +57,7 @@ public class RFLChargeGoal extends Goal {
             }
             if (timer == 20) {
                 Vec3 pos = this.entity.getPosition(1f);
-                //this.entity.setDeltaMovement(pos.vectorTo(targetPos).multiply(1.2d, 1.2d, 1.2d));
+                this.entity.setDeltaMovement(pos.vectorTo(targetPos).multiply(1.2d, 0.4d, 1.2d));
                 }
             }
             else{

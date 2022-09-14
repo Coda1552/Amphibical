@@ -17,7 +17,7 @@ public class ClientEvents {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         EntityRenderers.register(AmphibicalEntities.RAIN_FROG.get(), RainFrogRenderer::new);
-        EntityRenderers.register(AmphibicalEntities.RAIN_FROGGLE.get(), RainFroggleRenderer::new);
+        //EntityRenderers.register(AmphibicalEntities.RAIN_FROGGLE.get(), RainFroggleRenderer::new);
         EntityRenderers.register(AmphibicalEntities.FRUG.get(), FrugRenderer::new);
     }
 }

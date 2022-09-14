@@ -1,9 +1,7 @@
 package woda.amphibical.common.entity.ai.rainfrog;
 
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.animal.Animal;
 import woda.amphibical.common.entity.RainFrogEntity;
 
 import java.util.List;

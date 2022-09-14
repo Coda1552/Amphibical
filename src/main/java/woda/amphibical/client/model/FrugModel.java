@@ -4,7 +4,6 @@ import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import woda.amphibical.Amphibical;
 import woda.amphibical.common.entity.FrugEntity;
-import woda.amphibical.common.entity.RainFrogEntity;
 
 public class FrugModel extends AnimatedTickingGeoModel<FrugEntity> {
 

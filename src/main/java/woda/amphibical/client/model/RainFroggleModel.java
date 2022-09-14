@@ -3,7 +3,6 @@ package woda.amphibical.client.model;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
 import woda.amphibical.Amphibical;
-import woda.amphibical.common.entity.RainFrogEntity;
 import woda.amphibical.common.entity.RainFroggleEntity;
 
 public class RainFroggleModel extends AnimatedTickingGeoModel<RainFroggleEntity> {
